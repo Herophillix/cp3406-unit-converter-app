@@ -1,9 +1,11 @@
-import Category.Category;
-import Category.Category.CATEGORY_NAME;
-import Unit.Unit;
-import UnitSystem.UnitSystem;
+package com.example.unit_converter_app;
 
-import static Unit.Unit.RoundTo3sf;
+import com.example.unit_converter_app.Category.Category;
+import com.example.unit_converter_app.Category.Category.CATEGORY_NAME;
+import com.example.unit_converter_app.Unit.Unit;
+import com.example.unit_converter_app.UnitSystem.UnitSystem;
+
+import static com.example.unit_converter_app.Unit.Unit.RoundTo3sf;
 
 import java.util.Hashtable;
 

@@ -1,7 +1,7 @@
-package UnitSystem;
+package com.example.unit_converter_app.UnitSystem;
 
-import Category.*;
-import Category.Category.CATEGORY_NAME;
+import com.example.unit_converter_app.Category.*;
+import com.example.unit_converter_app.Category.Category.CATEGORY_NAME;
 
 public class Metric extends UnitSystem {
     public Metric()
@@ -12,5 +12,6 @@ public class Metric extends UnitSystem {
         units.put(CATEGORY_NAME.LENGTH, new Length().GetUnit("Meter"));
         units.put(CATEGORY_NAME.VOLUME, new Volume().GetUnit("Cubic Meter"));
         units.put(CATEGORY_NAME.WEIGHT, new Weight().GetUnit("Kilogram"));
+        systemName = "Metric";
     }
 }

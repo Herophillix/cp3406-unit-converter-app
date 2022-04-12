@@ -1,12 +1,14 @@
-package Category;
+package com.example.unit_converter_app.Category;
 
-import Unit.Unit;
+import com.example.unit_converter_app.Unit.Unit;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 public class Category {
     protected Unit controlUnit;
-    protected Hashtable<String, Unit> unitDictionary;
+    private Hashtable<String, Unit> unitDictionary;
+    private ArrayList<String> unitNameList;
 
     public enum CATEGORY_NAME
     {
@@ -20,6 +22,13 @@ public class Category {
     {
         controlUnit = new Unit("-None-", 1, 0);
         unitDictionary = new Hashtable<>();
+        unitNameList = new ArrayList<>();
+    }
+
+    protected void PutUnit(String name, Unit unit)
+    {
+        unitDictionary.put(name, unit);
+        unitNameList.add(name + " (" + unit.GetSign() + ")");
     }
 
     public Unit GetUnit(String name)
@@ -36,6 +45,11 @@ public class Category {
             }
         }
         return null;
+    }
+
+    public ArrayList<String> GetUnitNameList()
+    {
+        return unitNameList;
     }
 
     public double Convert(double value, String inputUnit, String outputUnit)
