@@ -11,8 +11,8 @@ public class Volume extends Category{
 
         PutUnit("Milliliter", new Unit("ml", 1000, 0));
         PutUnit("Liter", controlUnit);
-        PutUnit("Cubic Centimeter", new Unit("cm^3", 1000, 0));
-        PutUnit("Cubic Meter", new Unit("m^3", 0.001, 0));
+        PutUnit("Cubic Centimeter", new Unit("cm³", 1000, 0));
+        PutUnit("Cubic Meter", new Unit("m³", 0.001, 0));
         PutUnit("Cup", new Unit("cup", 4.2267548297, 0));
         PutUnit("Pint", new Unit("pint", 2.1133774149, 0));
         PutUnit("Quart", new Unit("qt", 1.0566887074, 0));

@@ -38,6 +38,11 @@ public class Unit {
             bd = bd.setScale(10, RoundingMode.HALF_EVEN);
             return bd.doubleValue();
         }
-        return value;
+        else
+        {
+            BigDecimal bd = new BigDecimal(value);
+            bd = bd.setScale(3, RoundingMode.HALF_EVEN);
+            return bd.doubleValue();
+        }
     }
 }

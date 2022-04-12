@@ -4,10 +4,14 @@ import static com.example.unit_converter_app.Unit.Unit.RoundTo10sf;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 
 import com.example.unit_converter_app.Category.*;
@@ -31,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout topDecimal;
     private EditText topDecimalInput;
     private TextView topDecimalUnit;
+    private TextWatcher topDecimalUnitWatcher;
     private Unit currentTopUnit;
 
     private EditText topInput;
@@ -41,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout bottomDecimal;
     private EditText bottomDecimalInput;
     private TextView bottomDecimalUnit;
+    private TextWatcher bottomDecimalUnitWatcher;
     private Unit currentBottomUnit;
 
     private TextView bottomText;
@@ -138,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void InitializeTextWidgets()
     {
-        topDecimalInput.addTextChangedListener(new TextWatcher() {
+        topDecimalUnitWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -153,26 +159,26 @@ public class MainActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
 
             }
-        });
+        };
+        topDecimalInput.addTextChangedListener(topDecimalUnitWatcher);
 
-//        bottomDecimalInput.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//                StartUnitConversion(bottomDecimalInput);
-//                Toast toast = Toast.makeText(getApplicationContext(), "Trial", Toast.LENGTH_SHORT);
-//                toast.show();
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable editable) {
-//
-//            }
-//        });
+        bottomDecimalUnitWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                StartUnitConversion(bottomDecimalInput);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        };
+        bottomDecimalInput.addTextChangedListener(bottomDecimalUnitWatcher);
 
         topInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -296,8 +302,8 @@ public class MainActivity extends AppCompatActivity {
                     currentTopUnit = currentCategory.unitDictionary.get(unitName);
                     break;
                 }
-                StartUnitConversion(topDecimalInput);
             }
+            StartUnitConversion(topDecimalInput);
             if (currentTopUnit != null)
             {
                 topDecimalUnit.setText(currentTopUnit.GetSign());
@@ -312,8 +318,8 @@ public class MainActivity extends AppCompatActivity {
                     currentBottomUnit = currentCategory.unitDictionary.get(unitName);
                     break;
                 }
-                StartUnitConversion(topDecimalInput);
             }
+            StartUnitConversion(topDecimalInput);
             if (currentBottomUnit != null)
             {
                 bottomDecimalUnit.setText(currentBottomUnit.GetSign());
@@ -325,16 +331,19 @@ public class MainActivity extends AppCompatActivity {
     {
         EditText destination;
         Unit originUnit, destinationUnit;
+        TextWatcher toRemoveTemp;
 
         if(origin == topDecimalInput)
         {
             destination = bottomDecimalInput;
+            toRemoveTemp = bottomDecimalUnitWatcher;
             originUnit = currentTopUnit;
             destinationUnit = currentBottomUnit;
         }
         else
         {
             destination = topDecimalInput;
+            toRemoveTemp = topDecimalUnitWatcher;
             originUnit = currentBottomUnit;
             destinationUnit = currentTopUnit;
         }
@@ -346,7 +355,10 @@ public class MainActivity extends AppCompatActivity {
             Double result = currentCategory.Convert(value, originUnit, destinationUnit);
             result = RoundTo10sf(result);
 
+            destination.removeTextChangedListener(toRemoveTemp);
             destination.setText(Double.toString(result));
+            destination.addTextChangedListener(toRemoveTemp);
+
         } catch (Exception e)
         {
 
@@ -376,5 +388,22 @@ public class MainActivity extends AppCompatActivity {
             output = output + textParser.Parse(text, categoryDictionary, currentSystem) + "\n";
         }
         bottomText.setText(output);
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = getCurrentFocus();
+            if (v instanceof EditText) {
+                Rect outRect = new Rect();
+                v.getGlobalVisibleRect(outRect);
+                if (!outRect.contains((int)event.getRawX(), (int)event.getRawY())) {
+                    v.clearFocus();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+            }
+        }
+        return super.dispatchTouchEvent( event );
     }
 }
