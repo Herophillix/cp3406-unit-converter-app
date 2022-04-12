@@ -40,14 +40,11 @@
                 android:layout_weight="4"
                 android:orientation="vertical">
 
-                <EditText
+                <TextView
                     android:id="@+id/top_title"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:background="@color/primary"
-                    android:ems="10"
-                    android:inputType="textPersonName"
+                    android:layout_height="wrap_content"
+                    android:background="@color/primary_dark"
                     android:text="Convert from"
                     android:textColor="@color/white" />
 
@@ -64,6 +61,7 @@
                     android:layout_weight="2"
                     android:background="@color/primary_light"
                     android:ems="10"
+                    android:gravity="top|left"
                     android:inputType="textPersonName" />
 
                 <LinearLayout
@@ -80,13 +78,15 @@
                         android:layout_height="match_parent"
                         android:layout_weight="8"
                         android:ems="10"
+                        android:gravity="bottom|right"
                         android:inputType="numberDecimal" />
 
                     <TextView
                         android:id="@+id/top_decimal_unit"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="2" />
+                        android:layout_weight="2"
+                        android:gravity="bottom|left" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -97,14 +97,11 @@
                 android:layout_weight="4"
                 android:orientation="vertical">
 
-                <EditText
+                <TextView
                     android:id="@+id/bottom_title"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:background="@color/primary"
-                    android:ems="10"
-                    android:inputType="textPersonName"
+                    android:layout_height="wrap_content"
+                    android:background="@color/primary_dark"
                     android:text="To"
                     android:textColor="@color/white" />
 
@@ -119,7 +116,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="2"
-                    android:background="@color/divider" />
+                    android:background="@color/divider"
+                    android:gravity="top|left" />
 
                 <LinearLayout
                     android:id="@+id/bottom_decimal"
@@ -135,13 +133,15 @@
                         android:layout_height="match_parent"
                         android:layout_weight="8"
                         android:ems="10"
+                        android:gravity="bottom|right"
                         android:inputType="numberDecimal" />
 
                     <TextView
                         android:id="@+id/bottom_decimal_unit"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="2" />
+                        android:layout_weight="2"
+                        android:gravity="bottom|left" />
                 </LinearLayout>
 
             </LinearLayout>

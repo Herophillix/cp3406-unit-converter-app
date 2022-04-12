@@ -30,10 +30,14 @@ public class Unit {
         return (value - adder) / multiplier;
     }
 
-    public static double RoundTo3sf(double value)
+    public static double RoundTo10sf(double value)
     {
-        BigDecimal bd = new BigDecimal(value);
-        bd = bd.setScale(3, RoundingMode.HALF_EVEN);
-        return bd.doubleValue();
+        if(value < 1)
+        {
+            BigDecimal bd = new BigDecimal(value);
+            bd = bd.setScale(10, RoundingMode.HALF_EVEN);
+            return bd.doubleValue();
+        }
+        return value;
     }
 }

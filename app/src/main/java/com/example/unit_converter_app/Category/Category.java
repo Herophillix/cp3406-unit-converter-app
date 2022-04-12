@@ -7,7 +7,7 @@ import java.util.Hashtable;
 
 public class Category {
     protected Unit controlUnit;
-    private Hashtable<String, Unit> unitDictionary;
+    public Hashtable<String, Unit> unitDictionary;
     private ArrayList<String> unitNameList;
 
     public enum CATEGORY_NAME

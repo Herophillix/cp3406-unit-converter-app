@@ -5,7 +5,7 @@ import com.example.unit_converter_app.Category.Category.CATEGORY_NAME;
 import com.example.unit_converter_app.Unit.Unit;
 import com.example.unit_converter_app.UnitSystem.UnitSystem;
 
-import static com.example.unit_converter_app.Unit.Unit.RoundTo3sf;
+import static com.example.unit_converter_app.Unit.Unit.RoundTo10sf;
 
 import java.util.Hashtable;
 
@@ -40,7 +40,7 @@ public class TextParser {
 
                             double value = Double.parseDouble(valueString);
                             double result = category.Convert(value, unit, targetSystemUnit);
-                            result = RoundTo3sf(result);
+                            result = RoundTo10sf(result);
 
                             returnString = returnString + result + " " + targetSystemUnit.GetSign() + " ";
                         }

@@ -6,7 +6,7 @@ import com.example.unit_converter_app.UnitSystem.*;
 
 import java.util.Hashtable;
 
-import static com.example.unit_converter_app.Unit.Unit.RoundTo3sf;
+import static com.example.unit_converter_app.Unit.Unit.RoundTo10sf;
 
 public class Main {
 
@@ -57,7 +57,7 @@ public class Main {
             String outputSign = category.GetUnit(outputUnit).GetSign();
 
             double outputValue = category.Convert(value, inputUnit, outputUnit);
-            outputValue = RoundTo3sf(value);
+            outputValue = RoundTo10sf(value);
 
             System.out.println(value + " " + inputSign + " = " + outputValue + " " + outputSign);
         }
