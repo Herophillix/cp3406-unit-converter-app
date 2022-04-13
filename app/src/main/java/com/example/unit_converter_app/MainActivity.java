@@ -9,6 +9,7 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.ScrollingMovementMethod;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -194,6 +195,9 @@ public class MainActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
             }
         });
+
+        topInput.setMovementMethod(new ScrollingMovementMethod());
+        bottomText.setMovementMethod(new ScrollingMovementMethod());
     }
 
     private void OnNewCategorySelected(String selectedItem)
