@@ -349,19 +349,28 @@ public class MainActivity extends AppCompatActivity {
         }
 
         String valueString = origin.getText().toString();
-        try {
-            Double value = Double.parseDouble(valueString);
-
-            Double result = currentCategory.Convert(value, originUnit, destinationUnit);
-            result = RoundTo10sf(result);
-
-            destination.removeTextChangedListener(toRemoveTemp);
-            destination.setText(Double.toString(result));
-            destination.addTextChangedListener(toRemoveTemp);
-
-        } catch (Exception e)
+        if(valueString.equals(""))
         {
+            destination.removeTextChangedListener(toRemoveTemp);
+            destination.setText("");
+            destination.addTextChangedListener(toRemoveTemp);
+        }
+        else
+        {
+            try {
+                Double value = Double.parseDouble(valueString);
 
+                Double result = currentCategory.Convert(value, originUnit, destinationUnit);
+                result = RoundTo10sf(result);
+
+                destination.removeTextChangedListener(toRemoveTemp);
+                destination.setText(Double.toString(result));
+                destination.addTextChangedListener(toRemoveTemp);
+
+            } catch (Exception e)
+            {
+
+            }
         }
     }
 
